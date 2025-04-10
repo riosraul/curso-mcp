@@ -3,6 +3,7 @@ from mcp.server.sse import SseServerTransport
 from starlette.routing import Mount
 from weather import mcp
 from api_key_auth import ensure_valid_api_key
+import uvicorn
 
 
 app = FastAPI(docs_url=None, redoc_url=None, dependencies=[Depends(ensure_valid_api_key)])
@@ -25,3 +26,7 @@ async def handle_sse(request: Request):
             init_options,
         )
 
+
+        if __name__ == "__main__":
+
+            uvicorn.run(app, host="0.0.0.0", port=8000)
